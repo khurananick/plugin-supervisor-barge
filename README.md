@@ -8,16 +8,17 @@ Make sure you have [Node.js](https://nodejs.org) as well as [`npm`](https://npmj
 
 Afterwards install the dependencies by running `npm install`:
 
-1. `cd` into `serverless` directory and edit a `.env` file with your `ACCOUNT_SID` and `AUTH_TOKEN`.
-2. Deploy your serverles environment with `twilio serverless:deploy`. This will return your serverless domain.
-3. Make a copy of `appConfig.example.js` into `appConfig.js` and add your Account SID and serverless domain and serverless domain and serverless domain and serverless domain.
-
 ```bash
 cd 
 
 # If you use npm
 npm install
 ```
+
+### Setup Cont'd
+1. `cd` into `serverless` directory and edit a `.env` file with your `ACCOUNT_SID` and `AUTH_TOKEN`.
+2. Deploy your serverles environment with `twilio serverless:deploy`. This will return your serverless domain.
+3. Make a copy of `appConfig.example.js` into `appConfig.js` and add your Account SID and serverless domain and serverless domain and serverless domain and serverless domain.
 
 ## Development
 
