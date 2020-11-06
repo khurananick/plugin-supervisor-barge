@@ -17,4 +17,5 @@ var appConfig = {
   ytica: false,
   logLevel: 'debug',
   showSupervisorDesktopView: true,
+  serviceBaseUrl: 'serverless_domain'
 };

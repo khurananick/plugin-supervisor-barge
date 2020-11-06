@@ -1,3 +1,8 @@
+serverless/.twilio-functions
+serverless/node_modules
+serverless/.env
+*.swp
+
 # Logs
 logs
 *.log
