@@ -22,8 +22,13 @@ exports.handler = async function(context, event, callback) {
     token,
     conference,
     participant,
-    endConferenceOnExit
+    endConferenceOnExit,
+    muted
   } = event;
+
+  const newCallParams = {
+    endConferenceOnExit, muted
+  };
 
   console.log('Validating request token');
   const tokenValidationApi = `https://iam.twilio.com/v1/Accounts/${context.ACCOUNT_SID}/Tokens/validate`;
@@ -57,9 +62,7 @@ exports.handler = async function(context, event, callback) {
   const participantResponse = await client
     .conferences(conference)
     .participants(participant)
-    .update({
-      endConferenceOnExit
-    }).catch(e => {
+    .update(newCallParams).catch(e => {
        console.error(e);
        return {};
     });

@@ -21,14 +21,14 @@ class SupervisorBargeButton extends React.Component {
     supervisorCallSid: '',
     muted: false
   }
-  
+
   componentDidMount() {
     Actions.addListener('afterMonitorCall', (payload) => {
       const { task } = payload;
       const conference = task && task.conference;
       const conferenceSid = conference && conference.conferenceSid;
       this.getSupervisorCallSid(conferenceSid);
-    })
+    });
   }
 
   getSupervisorCallSid = async (conferenceSid) => {
