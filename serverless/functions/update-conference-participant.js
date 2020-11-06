@@ -23,11 +23,13 @@ exports.handler = async function(context, event, callback) {
     conference,
     participant,
     endConferenceOnExit,
-    muted
+    muted,
+    callSidToCoach,
+    coaching
   } = event;
 
   const newCallParams = {
-    endConferenceOnExit, muted
+    endConferenceOnExit, muted, coaching, callSidToCoach
   };
 
   console.log('Validating request token');

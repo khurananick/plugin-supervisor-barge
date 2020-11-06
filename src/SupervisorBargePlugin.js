@@ -1,6 +1,7 @@
 import { FlexPlugin } from 'flex-plugin';
 import React from 'react';
 import SupervisorBargeButton from './components/SupervisorBargeButton';
+import SupervisorCoachButton from './components/SupervisorCoachButton';
 
 const PLUGIN_NAME = 'SupervisorBargePlugin';
 
@@ -18,5 +19,6 @@ export default class SupervisorBargePlugin extends FlexPlugin {
    */
   init(flex, manager) {
     flex.Supervisor.TaskOverviewCanvas.Content.add(<SupervisorBargeButton key="barge-button" />);
+    flex.Supervisor.TaskOverviewCanvas.Content.add(<SupervisorCoachButton key="barge-button" />);
   }
 }

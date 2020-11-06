@@ -16,11 +16,12 @@ const buttonStyle = {
   'margin-right': '6px',
 }
 
-class SupervisorBargeButton extends React.Component {
+class SupervisorCoachButton extends React.Component {
   state = {
     supervisorCallSid: '',
-    muted: false,
-    icon: 'MuteBold'
+    icon: 'GenericTask',
+    coaching: false,
+    callSidToCoach: ''
   }
 
   componentDidMount() {
@@ -40,7 +41,7 @@ class SupervisorBargeButton extends React.Component {
         supervisorParticipant = supervisorParticipant[0];
       }
       const supervisorCallSid = supervisorParticipant && supervisorParticipant.callSid;
-      this.setState({ supervisorCallSid, muted: true });
+      this.setState({ supervisorCallSid });
     } catch (error) {
       console.error('Error in getSupervisorCallSid\r\n', error);
     }
@@ -50,14 +51,16 @@ class SupervisorBargeButton extends React.Component {
     const { task } = this.props;
     const conference = task && task.conference;
     const conferenceSid = conference && conference.conferenceSid;
-    const { supervisorCallSid, muted } = this.state;
+    const { supervisorCallSid, coaching } = this.state;
 
-    if (muted) {
-      ConferenceService.unmuteParticipant(conferenceSid, supervisorCallSid);
-      this.setState({ muted: false, icon: 'Mute' });
+    console.log(conference)
+
+    if (!coaching) {
+      ConferenceService.coachParticipant(conferenceSid, supervisorCallSid, 'CAb93a7447a34ff8c7511de11f79f228bd');
+      this.setState({ coaching: true, callSidToCoach: 'CAb93a7447a34ff8c7511de11f79f228bd', icon: 'GenericTaskBold' });
     } else {
-      ConferenceService.muteParticipant(conferenceSid, supervisorCallSid);
-      this.setState({ muted: true, icon: 'MuteBold' });
+      ConferenceService.notCoachParticipant(conferenceSid, supervisorCallSid);
+      this.setState({ coaching: false, callSidToCoach: '', icon: 'GenericTask' });
     }
   }
 
@@ -79,4 +82,4 @@ class SupervisorBargeButton extends React.Component {
   }
 }
 
-export default withTheme(SupervisorBargeButton);
+export default withTheme(SupervisorCoachButton);

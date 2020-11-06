@@ -39,6 +39,36 @@ class ConferenceService {
     });
   }
 
+  _toggleParticipantCoach = (conference, participantSid, coaching, callSidToCoach) => {
+    return new Promise((resolve, reject) => {
+      const token = this._getUserToken();
+
+      console.log(`${coaching ? 'Coaching' : 'Not Coaching'} participant`, participantSid);
+      return fetch(`https://${this.serviceBaseUrl}/update-conference-participant`, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        body: (
+          `token=${token}`
+          + `&conference=${conference}`
+          + `&participant=${participantSid}`
+          + `&muted=${!coaching}`
+          + `&coaching=${coaching}`
+          + `&callSidToCoach=${callSidToCoach}`
+        )
+      })
+        .then(() => {
+          console.log(`${coaching ? 'Coaching' : 'Not Coaching'} successful for participant`, participantSid);
+          resolve();
+        })
+        .catch(error => {
+          console.error(`Error ${coaching ? 'coaching' : 'not coaching'} participant ${participantSid}\r\n`, error);
+          reject(error);
+        });
+    });
+  }
+
   _toggleParticipantMute = (conference, participantSid, muted) => {
     return new Promise((resolve, reject) => {
       const token = this._getUserToken();
@@ -165,6 +195,14 @@ class ConferenceService {
 
   unmuteParticipant = (conference, participantSid) => {
     return this._toggleParticipantMute(conference, participantSid, false);
+  }
+
+  coachParticipant = (conference, participantSid, callSidToCoach) => {
+    return this._toggleParticipantCoach(conference, participantSid, true, callSidToCoach);
+  }
+
+  notCoachParticipant = (conference, participantSid) => {
+    return this._toggleParticipantCoach(conference, participantSid, false, '');
   }
 
   removeParticipant = (conference, participantSid) => {
