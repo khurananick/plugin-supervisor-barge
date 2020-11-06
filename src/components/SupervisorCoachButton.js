@@ -53,11 +53,15 @@ class SupervisorCoachButton extends React.Component {
     const conferenceSid = conference && conference.conferenceSid;
     const { supervisorCallSid, coaching } = this.state;
 
-    console.log(conference)
+    let callSidToCoach;
+    for(const p of conference.participants)
+      if(!callSidToCoach)
+        if(p.uniqueId.match(/^WK/))
+          callSidToCoach = p.callSid
 
     if (!coaching) {
-      ConferenceService.coachParticipant(conferenceSid, supervisorCallSid, 'CAb93a7447a34ff8c7511de11f79f228bd');
-      this.setState({ coaching: true, callSidToCoach: 'CAb93a7447a34ff8c7511de11f79f228bd', icon: 'GenericTaskBold' });
+      ConferenceService.coachParticipant(conferenceSid, supervisorCallSid, callSidToCoach);
+      this.setState({ coaching: true, callSidToCoach: callSidToCoach, icon: 'GenericTaskBold' });
     } else {
       ConferenceService.notCoachParticipant(conferenceSid, supervisorCallSid);
       this.setState({ coaching: false, callSidToCoach: '', icon: 'GenericTask' });
