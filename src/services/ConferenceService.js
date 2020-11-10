@@ -3,7 +3,7 @@ import { Manager } from '@twilio/flex-ui';
 class ConferenceService {
   constructor() {
     const manager = Manager.getInstance();
-    this.serviceBaseUrl = manager.configuration.serviceBaseUrl;
+    this.serviceBaseUrl = '<<SERVERLESS_DOMAIN_HERE>>';
   }
 
   // Private functions

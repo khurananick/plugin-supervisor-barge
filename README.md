@@ -18,7 +18,8 @@ npm install
 ### Setup Cont'd
 1. `cd` into `serverless` directory and edit a `.env` file with your `ACCOUNT_SID` and `AUTH_TOKEN`.
 2. Deploy your serverles environment with `twilio serverless:deploy`. This will return your serverless domain.
-3. Make a copy of `appConfig.example.js` into `appConfig.js` and add your Account SID and serverless domain and serverless domain and serverless domain and serverless domain.
+3. Make a copy of `public/appConfig.example.js` into `public/appConfig.js` and add your Account SID.
+4. Edit `services/ConferenceService.js` and replace `<<SERVERLESS_DOMAIN_HERE>>` with your serverless domain.
 
 ## Development
 
